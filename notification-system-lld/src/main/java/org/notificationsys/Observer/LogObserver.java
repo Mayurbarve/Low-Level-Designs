@@ -2,15 +2,15 @@ package org.notificationsys.Observer;
 
 import org.notificationsys.NotificationService;
 
-public class Logger implements IObserver{
+public class LogObserver implements IObserver{
     private NotificationObservable observable;
 
-    public Logger() {
+    public LogObserver() {
         this.observable = NotificationService.INSTANCE.getObservable();
         observable.addObserver(this);
     }
 
-    public Logger(NotificationObservable observable) {
+    public LogObserver(NotificationObservable observable) {
         observable.addObserver(this);
         this.observable = observable;
     }

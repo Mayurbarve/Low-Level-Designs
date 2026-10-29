@@ -4,7 +4,9 @@ import org.notificationsys.Decorator.SignatureDecorator;
 import org.notificationsys.Decorator.TimeStampDecorator;
 import org.notificationsys.Notification.INotification;
 import org.notificationsys.Notification.SimpleNotification;
-import org.notificationsys.Observer.Logger;
+import org.notificationsys.Observer.LogObserver;
+import org.notificationsys.Observer.NotificationEngine;
+import org.notificationsys.Observer.NotificationObservable;
 import org.notificationsys.Strategies.EmailStrategy;
 import org.notificationsys.Strategies.PopUpStrategy;
 import org.notificationsys.Strategies.SMSStrategy;
@@ -16,8 +18,12 @@ public class Main {
         // Create NotificationService.
         NotificationService notificationService = NotificationService.INSTANCE;
 
+        //Get Observable
+        //NotificationObservable notificationObservable = notificationService.getObservable();
+
         // Create Logger Observer
-        Logger logger = new Logger();
+        //LogObserver logger = new LogObserver(notificationObservable);
+        LogObserver logger = new LogObserver();
 
         // Create NotificationEngine observers.
         NotificationEngine notificationEngine = new NotificationEngine();

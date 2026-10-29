@@ -1,8 +1,6 @@
-package org.notificationsys;
+package org.notificationsys.Observer;
 
-import org.notificationsys.Notification.INotification;
-import org.notificationsys.Observer.IObserver;
-import org.notificationsys.Observer.NotificationObservable;
+import org.notificationsys.NotificationService;
 import org.notificationsys.Strategies.INotificationStrategy;
 
 import java.util.ArrayList;

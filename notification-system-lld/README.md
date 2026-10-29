@@ -16,14 +16,14 @@ A small Java project demonstrating how a notification can be decorated with extr
 2. `TimeStampDecorator` and `SignatureDecorator` add details to its message.
 3. `NotificationService` receives the decorated notification.
 4. The service updates `NotificationObservable`, which notifies its observers.
-5. `Logger` prints the message, and `NotificationEngine` sends it to each configured strategy.
+5. `LogObserver` prints the message, and `NotificationEngine` sends it to each configured strategy.
 6. The email, SMS, and popup strategies print their simulated delivery output.
 
 ```text
 Main
   -> NotificationService
       -> NotificationObservable
-          -> Logger
+          -> LogObserver
           -> NotificationEngine
               -> EmailStrategy
               -> SMSStrategy
@@ -36,7 +36,6 @@ Main
 src/main/java/org/notificationsys/
 ├── Main.java                       # Application entry point and example setup
 ├── NotificationService.java        # Singleton service that accepts notifications
-├── NotificationEngine.java         # Observer that dispatches through strategies
 ├── Decorator/
 │   ├── INotificationDecorator.java # Base wrapper for notification decorators
 │   ├── TimeStampDecorator.java     # Adds the current time to a message
@@ -48,7 +47,8 @@ src/main/java/org/notificationsys/
 │   ├── IObservable.java            # Observable contract
 │   ├── IObserver.java              # Observer contract
 │   ├── NotificationObservable.java # Stores current notification and notifies observers
-│   └── Logger.java                 # Logs notifications
+│   ├── LogObserver.java            # Logs notifications
+│   └── NotificationEngine.java     # Dispatches through configured strategies
 └── Strategies/
     ├── INotificationStrategy.java # Delivery strategy contract
     ├── EmailStrategy.java          # Simulated email delivery
@@ -80,7 +80,7 @@ The program prints the logged notification and the output from each delivery str
 ## Design patterns in this example
 
 - **Singleton:** `NotificationService` is an enum singleton (`NotificationService.INSTANCE`).
-- **Observer:** `NotificationObservable` notifies `Logger` and `NotificationEngine` when a notification is set.
+- **Observer:** `NotificationObservable` notifies `LogObserver` and `NotificationEngine` when a notification is set.
 - **Strategy:** `NotificationEngine` can dispatch through any registered `INotificationStrategy` implementation.
 - **Decorator:** `TimeStampDecorator` and `SignatureDecorator` wrap an `INotification` and add message content without changing the base notification class.
 
